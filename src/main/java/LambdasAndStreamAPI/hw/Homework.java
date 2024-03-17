@@ -7,6 +7,8 @@ package LambdasAndStreamAPI.hw;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 public class Homework {
 
@@ -40,7 +42,7 @@ public class Homework {
     public static void printNamesOrdered(List<Person> persons) {
         persons.stream()
                 .map(Person::getName)
-                .sorted(Comparator.naturalOrder())
+                .sorted()
                 .forEach(s -> System.out.print(s + ", "));
     }
 
@@ -49,14 +51,10 @@ public class Homework {
      * Вывести на консоль мапипнг department -> personName
      * Map<Department, Person>
      */
-    public static Map<Department, Person> printDepartmentOldestPerson(List<Person> persons) {
+    public static Map<Department,Person> printDepartmentOldestPerson(List<Person> persons){
         return persons.stream()
-                .collect(Collectors.groupingBy(
-                        Person::getDepartment,
-                        Collectors.collectingAndThen(
-                                Collectors.maxBy(Comparator.comparing(Person::getAge)),
-                                person -> person.orElse(null))
-                ));
+                .collect(Collectors.toMap(Person::getDepartment,Function.identity(),
+                        BinaryOperator.maxBy(Comparator.comparing(Person::getAge))));
     }
 
     /**
