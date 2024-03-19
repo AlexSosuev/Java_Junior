@@ -62,10 +62,10 @@ public class Homework {
      */
     public static List<Person> findFirstPersons(List<Person> persons) {
         return persons.stream()
-                .filter(person -> person.getAge() < 30 && person.getSalary() > 50000)
-                .sorted(Comparator.comparingDouble(Person::getSalary))
+                .filter(person -> person.getAge() < 30)
+                .filter(person ->person.getSalary() > 50000)
                 .limit(10)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**

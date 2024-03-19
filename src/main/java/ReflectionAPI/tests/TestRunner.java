@@ -1,5 +1,6 @@
 package ReflectionAPI.tests;
 
+import java.lang.reflect.AccessFlag;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,9 +11,9 @@ public class TestRunner {
         final Object testObj = initTestObj(testClass);
         for (Method testMethod : testClass.getDeclaredMethods()) {
 
-//            if (testMethod.accessFlags().contains(AccessFlag.PRIVATE)) {
-//                continue;
-//            }
+            if (testMethod.accessFlags().contains(AccessFlag.PRIVATE)) {
+                continue;
+            }
 
             if (testMethod.getAnnotation(Test.class) != null) {
                 try {
