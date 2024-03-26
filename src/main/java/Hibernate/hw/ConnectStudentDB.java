@@ -10,7 +10,7 @@ import java.util.List;
 public class ConnectStudentDB {
     private static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-    public StudentNew findById(int id) {
+    public StudentNew findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(StudentNew.class, id);
         }
