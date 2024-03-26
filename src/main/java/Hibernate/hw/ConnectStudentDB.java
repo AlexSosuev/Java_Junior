@@ -42,7 +42,7 @@ public class ConnectStudentDB {
 
     public List<StudentNew> findStudentsOlderThan20() {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("FROM Student s WHERE s.age > 20", StudentNew.class).list();
+            return session.createQuery("FROM StudentNew sn WHERE sn.age > 20", StudentNew.class).list();
         }
     }
 }
